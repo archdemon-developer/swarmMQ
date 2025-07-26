@@ -1,0 +1,35 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Compiled object files, might be created by some tools
+*.o
+
+# Go module cache
+# This directory stores downloaded modules and build cache.
+# It's generally not committed to version control.
+/pkg/
+
+# Dependency directories (e.g., vendor directory if used)
+# If you are using Go Modules, the 'vendor' directory might be present.
+# It's usually managed by 'go mod vendor' and can be ignored.
+vendor/
+
+# Log files, temporary files, etc.
+*.log
+*.tmp
+*.bak
+
+# Editor/IDE specific files
+.idea/
+.vscode/
+.DS_Store # macOS specific
+Thumbs.db # Windows specific
+
+# Environment variables file
+.env
