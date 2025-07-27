@@ -3,6 +3,7 @@ package message
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"errors"
 	"time"
 )
 
@@ -33,12 +34,34 @@ func NewMessage(payload []byte, destination, producerID string) (*Message, error
 		return nil, err
 	}
 
-	return &Message{
+	msg := &Message{
 		ID:          messageId,
 		Payload:     payload,
 		Destination: destination,
 		ProducerID:  producerID,
 		Timestamp:   CurrentTimestamp(),
 		Priority:    5,
-	}, nil
+	}
+
+	if err = Validate(msg); err != nil {
+		return nil, err
+	}
+
+	return msg, nil
+}
+
+func Validate(message *Message) error {
+	if message.Destination == "" {
+		return errors.New("destination cannot be empty")
+	}
+
+	if len(message.Payload) == 0 {
+		return errors.New("payload.cannot be empty")
+	}
+
+	if message.ProducerID == "" {
+		return errors.New("producer id cannot be empty")
+	}
+
+	return nil
 }
