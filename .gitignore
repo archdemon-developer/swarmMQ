@@ -31,5 +31,6 @@ vendor/
 .DS_Store # macOS specific
 Thumbs.db # Windows specific
 
+*coverage.out
 # Environment variables file
 .env

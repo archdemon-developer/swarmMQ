@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  test:
+    desc: Run tests with race detection
+    cmds:
+      - go test -v ./...
+
+  coverage:
+    desc: Generate test coverage report
+    cmds:
+      - go test -coverprofile=coverage.out ./...
+      - go tool cover -html=coverage.out
