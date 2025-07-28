@@ -1,12 +1,5 @@
 package message
 
-import (
-	"crypto/rand"
-	"encoding/hex"
-	"errors"
-	"time"
-)
-
 type Message struct {
 	ID          string `json:"id"`
 	Payload     []byte `json:"payload"`
@@ -14,16 +7,6 @@ type Message struct {
 	Priority    int    `json:"priority"`
 	Timestamp   int64  `json:"timestamp"`
 	ProducerID  string `json:"producer"`
-}
-
-func GenerateID() (string, error) {
-	bytes := make([]byte, 4)
-	_, err := rand.Read(bytes)
-	return hex.EncodeToString(bytes), err
-}
-
-func CurrentTimestamp() int64 {
-	return time.Now().UnixNano()
 }
 
 func NewMessage(payload []byte, destination, producerID string) (*Message, error) {
@@ -48,20 +31,4 @@ func NewMessage(payload []byte, destination, producerID string) (*Message, error
 	}
 
 	return msg, nil
-}
-
-func Validate(message *Message) error {
-	if message.Destination == "" {
-		return errors.New("destination cannot be empty")
-	}
-
-	if len(message.Payload) == 0 {
-		return errors.New("payload.cannot be empty")
-	}
-
-	if message.ProducerID == "" {
-		return errors.New("producer id cannot be empty")
-	}
-
-	return nil
 }

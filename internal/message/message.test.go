@@ -2,6 +2,7 @@ package message
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 	"testing"
 	"time"
@@ -116,4 +117,17 @@ func TestNewMessage_InvalidProducerID(t *testing.T) {
 	if msg != nil {
 		t.Errorf("Expected message to be empty due to invalid producerID")
 	}
+}
+
+func TestSerialize_ValidMesageInput(t *testing.T) {
+
+	msg := &Message{
+		Destination: "test",
+		ProducerID:  "prod1",
+		Payload:     []byte("hi"),
+		ID:          "abc",
+	}
+
+	data, _ := Serialize(msg)
+	fmt.Println("Buffer size: ", len(data))
 }
